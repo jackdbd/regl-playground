@@ -1,0 +1,10 @@
+node_modules/
+
+# editor
+.vscode/
+
+# webpack bundles, source maps and assets are all in dist/
+dist/
+coverage/
+
+.coverage
