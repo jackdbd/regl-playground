@@ -11,6 +11,7 @@ module.exports = {
 
   entry: {
     home: path.join(__dirname, 'src', 'js', 'index.js'),
+    'dots-2d': path.join(__dirname, 'src', 'js', 'dots-2d.js'),
   },
 
   output: {
@@ -58,10 +59,16 @@ module.exports = {
       filename: 'index.html',
       chunks: ['commons', 'home'], // the order seems not important
     }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src', 'templates', 'dots-2d.html'),
+      hash: true,
+      filename: 'dots-2d.html',
+      chunks: ['commons', 'dots-2d'],
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'commons',
       filename: '[name].[chunkhash].bundle.js',
-      chunks: ['home'],
+      chunks: ['home', 'dots-2d'],
     }),
     new ExtractTextPlugin('[name].[chunkhash].bundle.css'),
   ],
