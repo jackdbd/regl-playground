@@ -1,5 +1,7 @@
 import '../css/dots-2d.css';
 
+const vertexShader = require('../glsl/vertexShader.glsl');
+const fragmentShader = require('../glsl/fragmentShader.glsl');
 const regl = require('regl')({
   canvas: document.getElementById('regl-canvas'),
 });
@@ -7,23 +9,8 @@ const regl = require('regl')({
 // regl render command
 const drawDots = regl({
 
-  frag: `
-  precision mediump float;
-  uniform vec4 color;
-
-  void main () {
-    gl_FragColor = color;
-  }`,
-
-  vert: `
-  precision mediump float;
-  uniform float pointWidth;
-  attribute vec2 xyPosition;
-
-    void main () {
-    gl_PointSize = pointWidth;
-    gl_Position = vec4(xyPosition, 0, 1);
-  }`,
+  frag: fragmentShader,
+  vert: vertexShader,
 
   // the values of uniforms and attributes in regl can be specified using
   // functions! And these functions get access to the context and props of the

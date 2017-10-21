@@ -41,6 +41,15 @@ module.exports = {
         include: path.join(__dirname, 'src', 'css'),
         use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' }),
       },
+      // rule for .glsl files (shaders)
+      {
+        test: /\.glsl$/,
+        use: [
+          {
+            loader: 'webpack-glsl-loader',
+          },
+        ],
+      },
     ],
   },
 
