@@ -5,7 +5,6 @@ engines:
     config:
       languages:
       - javascript
-      - python
   fixme:
     enabled: true
   radon:
@@ -16,5 +15,4 @@ ratings:
   - "**.js"
   - "**.jsx"
   - "**.module"
-  - "**.py"
 exclude_paths: []

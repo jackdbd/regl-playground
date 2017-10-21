@@ -5,6 +5,6 @@ node_modules/
 
 # webpack bundles, source maps and assets are all in dist/
 dist/
-coverage/
 
+coverage/
 .coverage

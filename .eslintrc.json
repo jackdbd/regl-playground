@@ -3,8 +3,6 @@
     "env": {
         // so ESlint does not complain about window and document being undefined
         "browser": true,
-        // so ESlint does not complain about $ and jQuery being undefined
-        "jquery": true,
         // so ESlint does not complain about describe, test, expect being undefined
         "jest": true
       },
