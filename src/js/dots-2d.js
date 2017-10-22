@@ -1,7 +1,7 @@
 import '../css/dots-2d.css';
 
-const vertexShader = require('../glsl/vertexShader.glsl');
-const fragmentShader = require('../glsl/fragmentShader.glsl');
+const vertexShader = require('../glsl/vertex/basic.glsl');
+const fragmentShader = require('../glsl/fragment/basic.glsl');
 const regl = require('regl')({
   canvas: document.getElementById('regl-canvas'),
 });
@@ -42,7 +42,7 @@ const drawDots = regl({
     // access the props passed when calling this render command
     color: (context, props) => props.color,
     // we can also access the props with a shorthand
-    pointWidth: regl.prop('pointWidth'),
+    pointSize: regl.prop('pointSize'),
   },
 
   primitive: 'points',
@@ -62,7 +62,7 @@ regl.frame((context) => {
   // call a regl command and pass some props to the regl context
   drawDots({
     color: [0.208, 0.304, 1.000, 1.000],
-    pointWidth: 15.0,
+    pointSize: 15.0,
     /**
      * Sinusoidal function.
      * @param {Number} t         Time (in seconds).
