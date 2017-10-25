@@ -13,6 +13,9 @@ module.exports = {
     home: path.join(__dirname, 'src', 'js', 'index.js'),
     'dots-2d': path.join(__dirname, 'src', 'js', 'dots-2d.js'),
     'dots-2d-shaders': path.join(__dirname, 'src', 'js', 'dots-2d-shaders.js'),
+    'batch-rendering': path.join(__dirname, 'src', 'js', 'batch-rendering.js'),
+    'one-shot-rendering': path.join(__dirname, 'src', 'js', 'one-shot-rendering.js'),
+    bunny: path.join(__dirname, 'src', 'js', 'bunny.js'),
   },
 
   output: {
@@ -80,6 +83,24 @@ module.exports = {
       hash: true,
       filename: 'dots-2d-shaders.html',
       chunks: ['commons', 'dots-2d-shaders'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src', 'templates', 'batch-rendering.html'),
+      hash: true,
+      filename: 'batch-rendering.html',
+      chunks: ['commons', 'batch-rendering'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src', 'templates', 'one-shot-rendering.html'),
+      hash: true,
+      filename: 'one-shot-rendering.html',
+      chunks: ['commons', 'one-shot-rendering'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src', 'templates', 'bunny.html'),
+      hash: true,
+      filename: 'bunny.html',
+      chunks: ['commons', 'bunny'],
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'commons',
