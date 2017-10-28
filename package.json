@@ -9,7 +9,7 @@
     "dev": "webpack-dev-server --config webpack.config.js",
     "lint": "eslint src",
     "build": "webpack --config webpack.config.js --progress",
-    "unit": "jest && codecov"
+    "test": "jest && codecov"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -38,6 +38,8 @@
     "extract-text-webpack-plugin": "^3.0.1",
     "html-webpack-plugin": "^2.30.1",
     "jest": "^21.2.1",
+    "jest-image-snapshot": "^2.1.0",
+    "navalia": "^1.2.0",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
     "webpack-bundle-analyzer": "^2.9.0",
