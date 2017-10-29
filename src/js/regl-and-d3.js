@@ -56,19 +56,14 @@ const makeDrawPoints = (regl, points) => {
   return drawPoints;
 };
 
-const animate = (
-  reglContext, layoutFunc, resetLayoutFunc = resetLayout,
-  duration = 1500, numPoints = 10000, pointWidth = 2,
-) => {
-  // make the previous positions the new starting positions
-  const oldPoints = resetLayoutFunc(numPoints);
-  // Call layout function on the points to recompute their x/y positions
+const animate = (reglContext, oldPoints, layoutFunc, duration = 2000, pointWidth = 2) => {
+  // Call layout function on old points to get new points
   const points = layoutFunc(oldPoints);
   const drawPoints = makeDrawPoints(reglContext, points);
 
   let startTime = null; // in seconds
   // Update the callback in regl.frame so that it gets the duration and start
-  // time of the animation, and knows when it can switch to the next animation. 
+  // time of the animation, and knows when it can switch to the next animation.
   const frameLoop = reglContext.frame(({ time }) => {
     // keep track of start time so we can get time elapsed
     // this is important since time doesn't reset when starting new animations
@@ -97,13 +92,15 @@ const animate = (
       // We are done with this layout, so cancel the loop and call animate with
       // the next layout
       frameLoop.cancel();
-      animate(reglContext, layoutCycler.next().value);
+      animate(reglContext, points, layoutCycler.next().value);
     }
   });
 };
 
 const main = (err, reglContext) => {
-  animate(reglContext, layoutCycler.next().value);
+  const numPoints = 1000;
+  const points = resetLayout(numPoints);
+  animate(reglContext, points, layoutCycler.next().value);
 };
 
 // create full screen canvas and WebGLRenderingContext
@@ -112,6 +109,6 @@ const regl = require('regl')({
   // container element which regl inserts a canvas into (default: document.body)
   container,
   // profile: true,
-  // callback that is called after the application loads
+  // callback to call after the application loads
   onDone: main,
 });
