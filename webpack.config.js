@@ -18,6 +18,7 @@ module.exports = {
     bunny: path.join(__dirname, 'src', 'js', 'bunny.js'),
     'tween-circles-blending': path.join(__dirname, 'src', 'js', 'tween-circles-blending.js'),
     sprites: path.join(__dirname, 'src', 'js', 'sprites.js'),
+    'regl-and-d3': path.join(__dirname, 'src', 'js', 'regl-and-d3.js'),
   },
 
   output: {
@@ -116,11 +117,17 @@ module.exports = {
       filename: 'sprites.html',
       chunks: ['commons', 'sprites'],
     }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src', 'templates', 'regl-and-d3.html'),
+      hash: true,
+      filename: 'regl-and-d3.html',
+      chunks: ['commons', 'regl-and-d3'],
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'commons',
       filename: '[name].[chunkhash].bundle.js',
       chunks: ['home', 'dots-2d', 'dots-2d-shaders', 'batch-rendering',
-        'one-shot-rendering', 'bunny', 'tween-circles-blending', 'sprites'],
+        'one-shot-rendering', 'bunny', 'tween-circles-blending', 'sprites', 'regl-and-d3'],
     }),
     new ExtractTextPlugin('[name].[chunkhash].bundle.css'),
   ],
