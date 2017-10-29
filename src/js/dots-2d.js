@@ -67,11 +67,13 @@ regl.frame((context) => {
      * Sinusoidal function.
      * @param {Number} t         Time (in seconds).
      * @param {Number} tau       Period of the sine wave (in seconds).
-     * @param {Number} amplitude Amplitude of the sine wave.     
+     * @param {Number} amplitude Amplitude of the sine wave.
      * @param {Number} fi        Phase of the sine wave (in radians).
      * @return {Number} pos      Position
      */
-    sineWaveFunction: ({ t, tau = 1, amplitude = 1, fi = 0 }) => {
+    sineWaveFunction: ({
+      t, tau = 1, amplitude = 1, fi = 0,
+    }) => {
       // angular frequency (in radians per second)
       const omega = (2 * Math.PI) / tau;
       const pos = amplitude * Math.sin((omega * t) + fi);

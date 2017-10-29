@@ -1,4 +1,4 @@
-import { makeDrawTriangle } from '../src/js/triangle'
+import { makeDrawTriangle } from '../src/js/triangle';
 
 // Create a headless 32x32 regl instance for testing.
 // Note: we need to create a webgl context with preserveDrawingBuffer: true in
@@ -13,7 +13,6 @@ const drawTriangle = makeDrawTriangle(regl);
 
 
 describe('drawTriangle', () => {
-
   test('before regl draw command, all pixels are black', () => {
     const pixels = regl.read();
     // create array of all zeros
@@ -59,5 +58,4 @@ describe('drawTriangle', () => {
     const expectedSubsetForAlpha = [0, 255];
     expect(alphas).toEqual(expect.arrayContaining(expectedSubsetForAlpha));
   });
-
 });
