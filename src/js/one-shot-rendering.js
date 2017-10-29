@@ -10,16 +10,14 @@ const regl = require('regl')({
 // create a regl draw command by passing a regl context
 const drawTriangle = makeDrawTriangle(regl);
 // In one shot rendering the command is executed once and immediately.
-drawTriangle(
-  {
-    scale: 1.0,
-    rgbColors: [
-      [1.0, 0.0, 0.0],
-      [0.0, 1.0, 0.0],
-      [0.0, 0.0, 1.0],
-    ],
-  }
-);
+drawTriangle({
+  scale: 1.0,
+  rgbColors: [
+    [1.0, 0.0, 0.0],
+    [0.0, 1.0, 0.0],
+    [0.0, 0.0, 1.0],
+  ],
+});
 
 // -------------------------------------------------------------------------- //
 // // this is what we are testing in one-shot-rendering.spec.js

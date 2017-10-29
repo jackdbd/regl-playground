@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
 
@@ -16,6 +16,8 @@ module.exports = {
     'batch-rendering': path.join(__dirname, 'src', 'js', 'batch-rendering.js'),
     'one-shot-rendering': path.join(__dirname, 'src', 'js', 'one-shot-rendering.js'),
     bunny: path.join(__dirname, 'src', 'js', 'bunny.js'),
+    'tween-circles-blending': path.join(__dirname, 'src', 'js', 'tween-circles-blending.js'),
+    sprites: path.join(__dirname, 'src', 'js', 'sprites.js'),
   },
 
   output: {
@@ -102,10 +104,23 @@ module.exports = {
       filename: 'bunny.html',
       chunks: ['commons', 'bunny'],
     }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src', 'templates', 'tween-circles-blending.html'),
+      hash: true,
+      filename: 'tween-circles-blending.html',
+      chunks: ['commons', 'tween-circles-blending'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src', 'templates', 'sprites.html'),
+      hash: true,
+      filename: 'sprites.html',
+      chunks: ['commons', 'sprites'],
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'commons',
       filename: '[name].[chunkhash].bundle.js',
-      chunks: ['home', 'dots-2d', 'dots-2d-shaders'],
+      chunks: ['home', 'dots-2d', 'dots-2d-shaders', 'batch-rendering',
+        'one-shot-rendering', 'bunny', 'tween-circles-blending', 'sprites'],
     }),
     new ExtractTextPlugin('[name].[chunkhash].bundle.css'),
   ],

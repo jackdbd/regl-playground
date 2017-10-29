@@ -27,7 +27,7 @@ const makeDrawTriangle = (reglContext) => {
         gl_FragColor = vec4(sqrt(frag_color), 1.0);
       }
     `,
-  
+
     // now that the shaders are defined, we pass the vertices to the GPU
     attributes: {
       position: [
@@ -40,7 +40,7 @@ const makeDrawTriangle = (reglContext) => {
     uniforms: {
       scale: reglContext.prop('scale'),
     },
-  
+
     // and we tell the GPU how many vertices to draw
     count: 3,
   });
