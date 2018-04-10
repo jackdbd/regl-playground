@@ -40,7 +40,7 @@
     "jest": "^22.1.4",
     "jest-image-snapshot": "^2.1.0",
     "navalia": "^1.2.0",
-    "style-loader": "^0.19.0",
+    "style-loader": "^0.20.3",
     "webpack": "^4.5.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^3.1.3",
