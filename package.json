@@ -36,7 +36,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.7.0",
     "extract-text-webpack-plugin": "^3.0.1",
-    "html-webpack-plugin": "^2.30.1",
+    "html-webpack-plugin": "^3.2.0",
     "jest": "^22.1.4",
     "jest-image-snapshot": "^2.1.0",
     "navalia": "^1.2.0",
@@ -49,7 +49,7 @@
   "dependencies": {
     "bunny": "^1.0.1",
     "chroma-js": "^1.3.4",
-    "d3": "^4.11.0",
+    "d3": "^5.0.0",
     "gl": "^4.0.4",
     "gl-mat4": "^1.1.4",
     "regl": "^1.3.0",
