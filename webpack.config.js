@@ -2,10 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
+  target: "web",
 
   context: path.resolve(__dirname, 'src'),
 
@@ -22,10 +23,12 @@ module.exports = {
   },
 
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: '[name].[chunkhash].bundle.js',
-    sourceMapFilename: '[file].map',
+    path: path.join(__dirname, "dist"),
+    filename: "[chunkhash].js",
+    chunkFilename: "[id].bundle.js"
   },
+
+  devtool: 'source-map',
 
   module: {
     rules: [
@@ -42,11 +45,29 @@ module.exports = {
           loader: 'babel-loader',
         },
       },
-      // rule for css files
+      // rule for .css/.sass/.scss files
       {
-        test: /\.css$/,
-        include: path.join(__dirname, 'src', 'css'),
-        use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' }),
+        test: /\.(css|sass|scss)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              // importLoaders allows to configure how many loaders before css-loader should be applied to @imported resources.
+              // 0 => no loaders (default); 1 => postcss-loader; 2 => postcss-loader, sass-loader
+              importLoaders: 2,
+              sourceMap: true,
+              minimize: { safe: true }
+            }
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true
+            }
+          }
+        ]
       },
       // rule for .glsl files (shaders)
       {
@@ -57,18 +78,57 @@ module.exports = {
           },
         ],
       },
+      // rule for textures (images)
+      {
+        test: /\.(jpe?g|png)$/i,
+        include: path.join(__dirname, "src", "textures"),
+        loaders: [
+          "file-loader",
+          {
+            loader: "image-webpack-loader",
+            query: {
+              progressive: true,
+              optimizationLevel: 7,
+              interlaced: false,
+              pngquant: {
+                quality: "65-90",
+                speed: 4
+              }
+            }
+          }
+        ]
+      }
     ],
   },
 
-  target: 'web',
-
-  devtool: 'source-map',
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        js: {
+          test: /\.js$/,
+          name: "commons",
+          chunks: "all",
+          minChunks: 7
+        },
+        css: {
+          test: /\.(css|sass|scss)$/,
+          name: "commons",
+          chunks: "all",
+          minChunks: 2
+        }
+      }
+    }
+  },
 
   plugins: [
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new CleanWebpackPlugin(
       ['dist'],
       { root: __dirname, exclude: ['favicon.ico'], verbose: true }),
+    new MiniCssExtractPlugin({
+        filename: "[chunkhash].css",
+        chunkFilename: "[id].bundle.css"
+      }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'templates', 'index.html'),
       hash: true,
@@ -123,13 +183,6 @@ module.exports = {
       filename: 'regl-and-d3.html',
       chunks: ['commons', 'regl-and-d3'],
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'commons',
-      filename: '[name].[chunkhash].bundle.js',
-      chunks: ['home', 'dots-2d', 'dots-2d-shaders', 'batch-rendering',
-        'one-shot-rendering', 'bunny', 'tween-circles-blending', 'sprites', 'regl-and-d3'],
-    }),
-    new ExtractTextPlugin('[name].[chunkhash].bundle.css'),
   ],
 
   devServer: {
