@@ -1,9 +1,9 @@
-import '../css/one-shot-rendering.css';
-import { makeDrawTriangle } from './triangle';
+import "../css/one-shot-rendering.css";
+import { makeDrawTriangle } from "./triangle";
 
 // -------------------------------------------------------------------------- //
-const container = document.getElementById('regl-canvas-container');
-const regl = require('regl')({
+const container = document.getElementById("regl-canvas-container");
+const regl = require("regl")({
   container,
 });
 

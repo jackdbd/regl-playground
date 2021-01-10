@@ -1,18 +1,20 @@
+os: linux
 language: node_js
-sudo: false
-dist: trusty
+cache: yarn
 addons:
   chrome: stable
-node_js:
-  - "lts/*"
-  - "stable"
-  - "node"
-  - "7"
 before_install:
   - # start your web application and listen on `localhost`
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 install:
   - yarn
+  - yarn global add codecov
 script:
   - yarn run test
   - yarn run lint
+after_success:
+  - codecov
+notifications:
+  email:
+    on_failure: always
+    on_success: change

@@ -1,7 +1,7 @@
-import '../css/batch-rendering.css';
+import "../css/batch-rendering.css";
 
-const canvas = document.getElementById('regl-canvas');
-const regl = require('regl')({
+const canvas = document.getElementById("regl-canvas");
+const regl = require("regl")({
   canvas,
 });
 
@@ -42,11 +42,7 @@ const drawTriangle = regl({
 
   attributes: {
     // [x,y] positions of the 3 vertices (without the offset)
-    position: [
-      -0.25, 0.0,
-      0.5, 0.0,
-      -0.1, -0.5,
-    ],
+    position: [-0.25, 0.0, 0.5, 0.0, -0.1, -0.5],
   },
 
   uniforms: {
@@ -54,9 +50,13 @@ const drawTriangle = regl({
     // to pass a third argument: batchId, which gives the index of the regl
     // 'drawTriangle' render command.
     color: ({ tick }, props, batchId) => {
-      const r = Math.sin(0.02 * ((0.1 + Math.sin(batchId)) * (tick + (3.0 * batchId))));
-      const g = Math.cos(0.02 * ((0.02 * tick) + (0.1 * batchId)));
-      const b = Math.sin(0.02 * (((0.3 + Math.cos(2.0 * batchId)) * tick) + (0.8 * batchId)));
+      const r = Math.sin(
+        0.02 * ((0.1 + Math.sin(batchId)) * (tick + 3.0 * batchId))
+      );
+      const g = Math.cos(0.02 * (0.02 * tick + 0.1 * batchId));
+      const b = Math.sin(
+        0.02 * ((0.3 + Math.cos(2.0 * batchId)) * tick + 0.8 * batchId)
+      );
       const alpha = 1.0;
       return [r, g, b, alpha];
     },
@@ -65,7 +65,7 @@ const drawTriangle = regl({
     // angle: regl.context('tick'),
     // but this will not work
     // angle: 0.01 * regl.context('tick'),
-    offset: regl.prop('offset'),
+    offset: regl.prop("offset"),
   },
 
   // disable the depth buffer

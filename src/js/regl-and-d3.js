@@ -1,9 +1,9 @@
 // import * as d3 from 'd3';
-import { greenCircleLayout, blueNormalLayout, resetLayout } from './layouts';
-import '../css/main.css';
+import { greenCircleLayout, blueNormalLayout, resetLayout } from "./layouts";
+import "../css/main.css";
 
-const vertexShader = require('../glsl/vertex/d3-layouts.glsl');
-const fragmenteShader = require('../glsl/fragment/d3-layouts.glsl');
+const vertexShader = require("../glsl/vertex/d3-layouts.glsl");
+const fragmenteShader = require("../glsl/fragment/d3-layouts.glsl");
 
 const width = window.innerWidth;
 const height = window.innerHeight;
@@ -28,22 +28,22 @@ const makeDrawPoints = (regl, points) => {
     attributes: {
       // each of these gets mapped to a single entry for each of the points.
       // this means the vertex shader will receive just the relevant value for a given point.
-      positionStart: points.map(d => [d.xStart, d.yStart]),
-      positionEnd: points.map(d => [d.xEnd, d.yEnd]),
-      colorStart: points.map(d => d.colorStart),
-      colorEnd: points.map(d => d.colorEnd),
+      positionStart: points.map((d) => [d.xStart, d.yStart]),
+      positionEnd: points.map((d) => [d.xEnd, d.yEnd]),
+      colorStart: points.map((d) => d.colorStart),
+      colorEnd: points.map((d) => d.colorEnd),
     },
 
     uniforms: {
       // by using `regl.prop` to pass these in, we can specify them as arguments
       // to our drawPoints function
-      pointWidth: regl.prop('pointWidth'),
+      pointWidth: regl.prop("pointWidth"),
       // regl actually provides these as viewportWidth and viewportHeight but I
       // am using these outside and I want to ensure they are the same numbers,
       // so I am explicitly passing them in.
-      stageWidth: regl.prop('stageWidth'),
-      stageHeight: regl.prop('stageHeight'),
-      duration: regl.prop('duration'),
+      stageWidth: regl.prop("stageWidth"),
+      stageHeight: regl.prop("stageHeight"),
+      duration: regl.prop("duration"),
       // time in milliseconds since the prop startTime (i.e. time elapsed)
       // note that `time` is passed by regl whereas `startTime` is a prop passed
       // to the drawPoints function.
@@ -51,12 +51,18 @@ const makeDrawPoints = (regl, points) => {
     },
 
     count: points.length,
-    primitive: 'points',
+    primitive: "points",
   });
   return drawPoints;
 };
 
-const animate = (reglContext, oldPoints, layoutFunc, duration = 2000, pointWidth = 2) => {
+const animate = (
+  reglContext,
+  oldPoints,
+  layoutFunc,
+  duration = 2000,
+  pointWidth = 2
+) => {
   // Call layout function on old points to get new points
   const points = layoutFunc(oldPoints);
   const drawPoints = makeDrawPoints(reglContext, points);
@@ -87,7 +93,7 @@ const animate = (reglContext, oldPoints, layoutFunc, duration = 2000, pointWidth
       startTime,
     });
 
-    if (time - startTime > (duration / 1000)) {
+    if (time - startTime > duration / 1000) {
       // console.log('done animating, moving to next layout');
       // We are done with this layout, so cancel the loop and call animate with
       // the next layout
@@ -104,8 +110,8 @@ const main = (err, reglContext) => {
 };
 
 // create full screen canvas and WebGLRenderingContext
-const container = document.getElementById('regl-canvas-container');
-const regl = require('regl')({
+const container = document.getElementById("regl-canvas-container");
+const regl = require("regl")({
   // container element which regl inserts a canvas into (default: document.body)
   container,
   // profile: true,

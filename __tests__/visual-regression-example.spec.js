@@ -1,9 +1,9 @@
-import { toMatchImageSnapshot } from 'jest-image-snapshot';
-import { Chrome } from 'navalia';
+import { toMatchImageSnapshot } from "jest-image-snapshot";
+import { Chrome } from "navalia";
 
 expect.extend({ toMatchImageSnapshot });
 
-describe('Visual Regressions', () => {
+describe("Visual Regressions", () => {
   let chrome = null;
 
   beforeEach(() => {
@@ -23,15 +23,16 @@ describe('Visual Regressions', () => {
     chrome.done();
   });
 
-  it('should NEVER happen', () => {
+  it("should NEVER happen", () => {
     // regl.party takes too long to load and exceeds the timeout specified by
     // jasmine.DEFAULT_TIMEOUT_INTERVAL.
     // const url = 'http://regl.party/';
-    const url = 'http://learningwebgl.com/lessons/lesson01/index.html';
+    const url = "http://learningwebgl.com/lessons/lesson01/index.html";
     // we can spin up a dev server with yarn run dev and test locally
     // const url = 'http://localhost:8080/one-shot-rendering.html'
-    return chrome.goto(url)
+    return chrome
+      .goto(url)
       .then(() => chrome.screenshot())
-      .then(image => expect(image).toMatchImageSnapshot());
+      .then((image) => expect(image).toMatchImageSnapshot());
   });
 });

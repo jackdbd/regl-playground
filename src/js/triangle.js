@@ -35,10 +35,10 @@ const makeDrawTriangle = (reglContext) => {
         [0.0, 0.0],
         [-1.0, -1.0],
       ],
-      color: reglContext.prop('rgbColors'),
+      color: reglContext.prop("rgbColors"),
     },
     uniforms: {
-      scale: reglContext.prop('scale'),
+      scale: reglContext.prop("scale"),
     },
 
     // and we tell the GPU how many vertices to draw

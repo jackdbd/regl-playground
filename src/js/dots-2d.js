@@ -1,14 +1,13 @@
-import '../css/dots-2d.css';
+import "../css/dots-2d.css";
 
-const vertexShader = require('../glsl/vertex/basic.glsl');
-const fragmentShader = require('../glsl/fragment/basic.glsl');
-const regl = require('regl')({
-  canvas: document.getElementById('regl-canvas'),
+const vertexShader = require("../glsl/vertex/basic.glsl");
+const fragmentShader = require("../glsl/fragment/basic.glsl");
+const regl = require("regl")({
+  canvas: document.getElementById("regl-canvas"),
 });
 
 // regl render command
 const drawDots = regl({
-
   frag: fragmentShader,
   vert: vertexShader,
 
@@ -42,10 +41,10 @@ const drawDots = regl({
     // access the props passed when calling this render command
     color: (context, props) => props.color,
     // we can also access the props with a shorthand
-    pointSize: regl.prop('pointSize'),
+    pointSize: regl.prop("pointSize"),
   },
 
-  primitive: 'points',
+  primitive: "points",
   count: 5,
 });
 
@@ -61,7 +60,7 @@ regl.frame((context) => {
   });
   // call a regl command and pass some props to the regl context
   drawDots({
-    color: [0.208, 0.304, 1.000, 1.000],
+    color: [0.208, 0.304, 1.0, 1.0],
     pointSize: 15.0,
     /**
      * Sinusoidal function.
@@ -71,12 +70,10 @@ regl.frame((context) => {
      * @param {Number} fi        Phase of the sine wave (in radians).
      * @return {Number} pos      Position
      */
-    sineWaveFunction: ({
-      t, tau = 1, amplitude = 1, fi = 0,
-    }) => {
+    sineWaveFunction: ({ t, tau = 1, amplitude = 1, fi = 0 }) => {
       // angular frequency (in radians per second)
       const omega = (2 * Math.PI) / tau;
-      const pos = amplitude * Math.sin((omega * t) + fi);
+      const pos = amplitude * Math.sin(omega * t + fi);
       return pos;
     },
   });

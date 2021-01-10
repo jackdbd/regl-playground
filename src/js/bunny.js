@@ -1,9 +1,9 @@
-import '../css/bunny.css';
+import "../css/bunny.css";
 
-const canvas = document.getElementById('regl-canvas');
-const mat4 = require('gl-mat4');
-const bunny = require('bunny');
-const regl = require('regl')({
+const canvas = document.getElementById("regl-canvas");
+const mat4 = require("gl-mat4");
+const bunny = require("bunny");
+const regl = require("regl")({
   canvas,
 });
 
@@ -63,4 +63,3 @@ regl.frame(() => {
   // call regl render command
   drawBunny();
 });
-

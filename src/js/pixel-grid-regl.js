@@ -1,4 +1,4 @@
-import * as grid from 'pixel-grid';
+import * as grid from "pixel-grid";
 
 const data = [
   [0, 1, 1, 0],
@@ -12,10 +12,9 @@ const pixels = grid(data, {
 });
 pixels.frame(() => {
   // Update pixel grid with new data. Allows you to sync updates with monitor refreshes.
-  pixels.update(
-    [
-      [Math.random(), Math.random(), Math.random(), Math.random()],
-      [Math.random(), Math.random(), Math.random(), Math.random()],
-      [Math.random(), Math.random(), Math.random(), Math.random()],
-    ]);
+  pixels.update([
+    [Math.random(), Math.random(), Math.random(), Math.random()],
+    [Math.random(), Math.random(), Math.random(), Math.random()],
+    [Math.random(), Math.random(), Math.random(), Math.random()],
+  ]);
 });
